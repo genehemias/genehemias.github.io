@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess the Animal</title>	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/animalGuessing.css">	
+</head>
+<body>
+	<div class="header">		
+		<h3><a href="mathQuiz.html">Math Quiz</a></h3>
+		<h1>Animal Guessing Game</h1>
+		<h3><a href="colorChange.html">Color Change</a></h3>
+	</div>
+	<br>
+	<div class='main'>
+		<div>
+			<img id='animalImg' src='images/dog.png' title="dog">
+		</div>
+		<div class="buttons">
+			<button onclick="animalBtnClick('dog')">Dog</button>
+			<button onclick="animalBtnClick('cat')">Cat</button>
+			<button onclick="animalBtnClick('pig')">Pig</button>
+			<button onclick="animalBtnClick('sheep')">Sheep</button>
+			<button onclick="animalBtnClick('horse')">Horse</button>
+			<button onclick="animalBtnClick('cow')">Cow</button>
+			<button onclick="animalBtnClick('squirrel')">Squirrel</button>
+		</div>
+		<div class="main">
+			<h3>You've answered this many correct in a row: <span id='streak'>0</span></h3>
+			<h3>Current Level: <span id='level'>1</span></h3>
+		</div>
+	</div>
+	<div>		
+		<audio id='animalSound'></audio>
+	</div>
+
+	<script src='js/animalGuessing.js'></script>
+</body>
+</html>

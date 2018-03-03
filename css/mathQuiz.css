@@ -1,0 +1,65 @@
+.main {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.problem {
+	display: flex;
+	flex-direction: column;
+	-webkit-align-items: flex-end;
+	align-items: flex-end;		
+}
+h1,p,label {
+	margin-top: 2px;
+	padding-top: : 2px;
+	margin-bottom: 1px;
+	padding-bottom: 1px;
+	font-weight: bold;
+}
+.problemContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	flex:1;
+}
+.problemAndButtons{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding-bottom: 25px
+}
+.buttons {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	flex-grow: 0;
+	flex:1;
+}
+.options {
+	display: flex;
+	flex-direction: column;
+	flex:1;
+}
+img {
+	width:250px;
+}
+#player {
+	position: absolute;
+}
+#computer {
+	position: absolute;
+	top: 350px;	
+}		
+#feedback {
+	position:fixed;
+	bottom: 450px;
+	left:450px;
+}
+#cars {
+	display: flex;
+	flex-direction: column;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Math Quiz</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/mathQuiz.css">	
+
+</head>
+<body onload="init()">
+	<div class="header">
+		<h1>Math Quiz</h1>
+		<h3><a href="animalGuessing.html">Animal Guessing Game</a></h3>
+		<h3><a href="colorChange.html">Color Change</a></h3>
+	</div>
+	<div class="main">
+		<div class="problemAndButtons">			
+			<div class='problemContainer'>			
+				<div class="problem">	
+					<!--<form onsubmit="checkAnswer();" >			-->
+					<h1 id='operand1'>X</h1>						
+					<h1>
+						<span id="operator">+</span>
+						<span id="operand2">Y</span>
+					</h1>				
+					<p>------------------</p>				
+					<input type="text" id="answer" size='3' autofocus="true" value="">
+					<button id="checkBtn" onclick="checkAnswer();" disabled="true">Check Answer</button>
+					<!--<input type='submit'>-->
+					<!--</form>-->
+				</div>			
+			</div>
+			<div class="buttons">				
+				<h2>Click Start</h2>				
+				<button id="startBtn" onclick="startGame()"> Start </button>
+				<button id="restartBtn" onclick="location.reload();" hidden="true"> Start over </button>
+			</div>
+			<div class='options'>
+				<p>What sort of problems do you want to include?</p>
+				<div id='options'>
+				<input type="checkbox" id="add"><label>(+) Addition</label><br>
+				<input type="checkbox" id="subtract"><label>(-) Subtraction</label><br>
+				<input type="checkbox" id="multiply"><label>(x) Multiplication</label>
+				</div>
+			</div>
+		</div>
+		<div id="cars">			
+			<div><img src="images/playerCar.png" id="player">			</div>
+			<div><img src="images/computerCar.gif" id='computer'>			</div>
+		</div>
+		<div>
+			<h2 id='feedback'></h2>
+		</div>
+	</div>
+	<script src="js/mathQuiz.js"></script>
+</body>
+</html>
