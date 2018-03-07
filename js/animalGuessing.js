@@ -46,7 +46,7 @@ function checkAnswer(){
 
 function correctGuess(name, img, imgTitle){
 	//get new animal. don't present the same animal twice in a row
-	let currentAnimalIndex = animals.indexOf(imgTitle);
+	let currentAnimalIndex = animals.findIndex(p => p.name === imgTitle);
 	let i = currentAnimalIndex;
 	while (i === currentAnimalIndex) {
 	 i = Math.floor((Math.random() * (animals.length - 1)) + 1 );
