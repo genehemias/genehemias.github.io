@@ -1,56 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" >
 <head>
-	<title>Math Quiz</title>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/mathQuiz.css">	
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Math Racer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="mathQuiz.css" />
 </head>
-<body onload="init()">
-	<div class="header">
-		<h1>Math Quiz</h1>
-		<h3><a href="animalGuessing.html">Animal Guessing Game</a></h3>
-		<h3><a href="colorChange.html">Color Change</a></h3>
-	</div>
-	<div class="main">
-		<div class="problemAndButtons">			
-			<div class='problemContainer'>			
-				<div class="problem">	
-					<!--<form onsubmit="checkAnswer();" >			-->
-					<h1 id='operand1'>X</h1>						
-					<h1>
-						<span id="operator">+</span>
-						<span id="operand2">Y</span>
-					</h1>				
-					<p>------------------</p>				
-					<input type="text" id="answer" size='3' autofocus="true" value="">
-					<button id="checkBtn" onclick="checkAnswer();" disabled="true">Check Answer</button>
-					<!--<input type='submit'>-->
-					<!--</form>-->
-				</div>			
-			</div>
-			<div class="buttons">				
-				<h2>Click Start</h2>				
-				<button id="startBtn" onclick="startGame()"> Start </button>
-				<button id="restartBtn" onclick="location.reload();" hidden="true"> Start over </button>
-			</div>
-			<div class='options'>
-				<p>What sort of problems do you want to include?</p>
-				<div id='options'>
-				<input type="checkbox" id="add"><label>(+) Addition</label><br>
-				<input type="checkbox" id="subtract"><label>(-) Subtraction</label><br>
-				<input type="checkbox" id="multiply"><label>(x) Multiplication</label>
-				</div>
-			</div>
-		</div>
-		<div id="cars">			
-			<div><img src="images/playerCar.png" id="player">			</div>
-			<div><img src="images/computerCar.gif" id='computer'>			</div>
-		</div>
-		<div>
-			<h2 id='feedback'></h2>
-		</div>
-	</div>
-	<script src="js/mathQuiz.js"></script>
+<body>
+    <div id="setup">
+        <h4 class="text-center">Math Racer Setup</h4>
+        <div class="grid-y grid-margin-x">
+            <div class="cell small-2">
+                <h6>Maximum Operand</h6>
+                <div class="slider" data-slider data-initial-start="50" data-step="10" data-start="10" data-end="150">
+                    <span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="maxOperand"></span>
+                    <span class="slider-fill" data-slider-fill></span>
+                </div>
+            </div>
+            <div class="cell small-1">
+                <div class="grid-x">
+                    <div class="cell small-4"></div>
+                    <div class="cell small-4">
+                        <input type="number" id="maxOperand">
+                    </div>
+                    <div class="cell small-4"></div>
+                </div>
+            </div>
+            <div class="cell small-2">
+                <h6>Number of Problems</h6>
+                <div class="slider" data-slider data-initial-start="20" data-step="5" data-start="10" data-end="50">
+                    <span class="slider-handle" data-slider-handle role="slider" aria-controls="numProblems"></span>
+                    <span class="slider-fill" data-slider-fill></span>
+                </div>
+            </div>
+            <div class="cell small-1">
+                    <div class="grid-x">
+                            <div class="cell small-4"></div>
+                            <div class="cell small-4">
+                                <input type="number" id="numProblems">
+                            </div>
+                            <div class="cell small-4"></div>
+                        </div>
+            </div>
+            <div class="cell small-3">
+                <label for="duration">
+                    <h6>Race Duration</h6>
+                    <select name="duration" id="duration">
+                        <option value="60">One Minute</option>
+                        <option value="120">Two Minutes</option>
+                        <option value="180">Three Minutes</option>
+                        <option value="300">Five Minutes</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <fieldset>
+            <h6>Include Operators</h6>
+            <div class="grid-x">
+                <div class="cell small-6"><input id="cbAdd" type="checkbox"><label for="cbAdd">Add</label></div>
+                <div class="cell small-6"><input id="cbSubtract" type="checkbox"><label for="cbSubtract">Subtract</label></div>
+                <div class="cell small-6"><input id="cbMultiply" type="checkbox"><label for="cbMultiply">Multiply</label></div>
+                <div class="cell small-6"><input id="cbDivide" type="checkbox"><label for="cbDivide">Divide</label></div>
+            </div>
+        </fieldset>
+        <div>
+            <button type="button" id="btnStart" class="button expanded">Start Game</button>
+        </div>
+    </div>
+
+    <div id="gameboard">
+        <div class="grid-x">
+            <div class="cell small-10">
+                <h5 id="lblFeedback" class="text-center">answer to win</h5>
+            </div>
+            <div class="cell small-2">
+                <button class="close-button" id="btnReset" aria-label="Close alert" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="grid-x">
+            <div class="cell small-6">
+                <div class="grid-y callout marg">
+                    <div class="cell text-right" id="operand1">4</div>
+                    <div class="cell text-right">                        
+                        <div class="text-left inline" id="operator">+</div >
+                        <div class="text-right inline" id="operand2">4</div >
+                    </div>                    
+                </div>
+                <div class="marg">
+                    <input type="tel" id="answer">                    
+                </div>  
+            </div>
+            <div class="cell small-6" style="height:100%;">
+                <div class="grid-x" style="height:100%;">
+                    <!-- <div class="cell small-6"></div> -->
+                    <div class="cell small-2 medium-4 marg outer">
+                        <div id="player"></div>
+                    </div>
+                    <div class="cell small-2 medium-4 marg outer">
+                        <div id=opponent></div>
+                    </div>
+                    <!-- <div class="cell small-6"></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="callout marg">
+            <!-- TODO: click this button when Enter key is pressed (desktop and mobile) -->
+            <button type="submit" id="btnSubmit" class="button expanded">Submit Answer</button>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="mathProblem.js" type="module"></script>
+    <script src="mathQuiz.js" type="module"></script>
+
 </body>
 </html>
