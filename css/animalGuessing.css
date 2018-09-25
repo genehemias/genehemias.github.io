@@ -1,21 +1,33 @@
-.main {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.yellow {
+    border: 1px solid yellow;
+}
+
+.blue {
+    border: 1px solid blue;
 }
 
 img {
-	height: 400px;
+    height: 275px;
+    margin: auto;
+    display: block;
 }
-.buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: stretch;
+
+.pad-10 {
+    padding: 10px;
 }
-button {
-	width: 85px;
-	height: 55px;
-	font-weight: bold;
-	font-size: 15px;
+
+.top-bar {
+    /* z-index: 3; */
+    position: absolute;
+}
+
+.center-div {
+    margin: auto;
+    width: 95%;
+}
+
+.center-p {
+    text-align: center;
+    margin: 2px 2px 2px 2px;
+    font-size: .75em;
 }
