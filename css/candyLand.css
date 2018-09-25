@@ -33,3 +33,8 @@
     justify-content: space-around;
     /*border: 1px dotted blue;*/
 }
+
+.top-bar {
+    /* z-index: 3; */
+    position: absolute;
+}
