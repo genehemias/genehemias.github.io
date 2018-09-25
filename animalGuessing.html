@@ -1,39 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Guess the Animal</title>	
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/animalGuessing.css">	
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Animal Guessing Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
-	<div class="header">		
-		<h3><a href="mathQuiz.html">Math Quiz</a></h3>
-		<h1>Animal Guessing Game</h1>
-		<h3><a href="colorChange.html">Color Change</a></h3>
-	</div>
-	<br>
-	<div class='main'>
-		<div>
-			<img id='animalImg' src='images/dog.png' title="dog">
-		</div>
-		<div class="buttons">
-			<button onclick="animalBtnClick('dog')">Dog</button>
-			<button onclick="animalBtnClick('cat')">Cat</button>
-			<button onclick="animalBtnClick('pig')">Pig</button>
-			<button onclick="animalBtnClick('sheep')">Sheep</button>
-			<button onclick="animalBtnClick('horse')">Horse</button>
-			<button onclick="animalBtnClick('cow')">Cow</button>
-			<button onclick="animalBtnClick('squirrel')">Squirrel</button>
-		</div>
-		<div class="main">
-			<h3>You've answered this many correct in a row: <span id='streak'>0</span></h3>
-			<h3>Current Level: <span id='level'>1</span></h3>
-		</div>
-	</div>
-	<div>		
-		<audio id='animalSound'></audio>
-	</div>
+    <nav>
+        <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="extra-large">
+            <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+            <div class="title-bar-title">Gabe's Games</div>
+        </div>
 
-	<script src='js/animalGuessing.js'></script>
+        <div class="top-bar" id="example-menu">
+             <div class="top-bar-left"> 
+                 <ul class="dropdown menu vertical" data-dropdown-menu>
+                    <li><a href="#">Animal Guessing</a></li>
+                    <li><a href="mathQuiz.html">Math Racer</a></li>
+                    <li><a href="#">Candy Land Cards</a></li>
+                    <li><a href="#">Color Squares</a></li>
+                </ul> 
+            </div>
+        </div>
+    </nav> 
+
+    <div class="pad-10">
+        <img src="images/dog.png" alt="woof woof" id="animalImg" title="dog">
+    </div>
+    <div class="center-div">
+        <p class="center-p" id="feedback">What animal is this?</p>
+        <p class="center-p">Correct Streak: <span id="streak">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Level: <span id="level">1</span></p>
+    </div>
+    <div class="button-group expanded">
+        <button class="button" onclick="animalBtnClick('dog')">Dog</button>
+        <button class="button" onclick="animalBtnClick('cat')">Cat</button>
+        <button class="button" onclick="animalBtnClick('cow')">Cow</button>
+    </div>
+    <div class="button-group expanded">
+        <button class="button" onclick="animalBtnClick('sheep')">Sheep</button>
+        <button class="button" onclick="animalBtnClick('horse')">Horse</button>
+        <button class="button" onclick="animalBtnClick('squirrel')">Squirrel</button>
+    </div>
+    <div class="button-group expanded">
+        <button class="button" onclick="animalBtnClick('pig')">Pig</button>
+        <button class="button" onclick="animalBtnClick('dolphin')">Dolphin</button>
+        <button class="button" onclick="animalBtnClick('snake')">Snake</button>
+    </div>
+
+    <div>		
+        <audio id='animalSound'></audio>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="animalGuessing.js"></script>
 </body>
 </html>
