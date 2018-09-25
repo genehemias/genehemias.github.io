@@ -6,7 +6,7 @@ function Animal(name, srcImg){
 	this.srcAudio = 'sounds/' + name + '.mp3';
 }
 
-var animals = [
+const animals = [
 	new Animal('dog','dog.png'),
 	new Animal('cat','cat.png'),
 	new Animal('pig', 'pig.png'),
@@ -50,10 +50,11 @@ function checkAnswer(){
 
 function correctGuess(name, img, imgTitle){
 	//get new animal. don't present the same animal twice in a row
-	let currentAnimalIndex = animals.indexOf(imgTitle);
-	let i = currentAnimalIndex;
-	while (i === currentAnimalIndex) {
-	 i = Math.floor((Math.random() * (animals.length - 1)) + 1 );
+	let nextAnimalName = imgTitle;	
+	let i = 0;
+	while (imgTitle === nextAnimalName) {		
+		i = Math.floor((Math.random() * (animals.length - 1)) + 1 );
+		nextAnimalName = animals[i].name;
 	}
 	//present new animal
 	img.setAttribute('title', animals[i].name);
