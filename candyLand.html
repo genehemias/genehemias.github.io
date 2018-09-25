@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Candy Land</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/candyLand.css" />    
+</head>
+<body>
+
+    <nav>
+        <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="extra-large">
+            <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+            <div class="title-bar-title">Gabe's Games</div>
+        </div>
+
+        <div class="top-bar" id="example-menu">
+                <div class="top-bar-left"> 
+                    <ul class="dropdown menu vertical" data-dropdown-menu>
+                    <li><a href="animalGuessing.html">Animal Guessing</a></li>
+                    <li><a href="mathQuiz.html">Math Racer</a></li>
+                    <li><a href="#">Candy Land Cards</a></li>
+                    <li><a href="#">Color Squares</a></li>
+                </ul> 
+            </div>
+        </div>        
+    </nav>
+
+    <div class="row1">
+        <div id="spacer"></div>
+        <div class="column1">
+            <div id="card">
+            <p id="label"></p>
+            </div>
+            <button class="button" id="button" type="button" name="button">
+            Next Card
+            </button>
+        </div>
+        <div id="spacer"></div>
+    </div>
+    <div>		
+        <audio id='clickSound' src="sounds/click.mp3"></audio>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script> 
+    <script src="candyLand.js"></script>
+</body>
+</html>

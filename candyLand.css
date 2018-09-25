@@ -1,0 +1,35 @@
+.yellow {
+    border: 1px solid yellow;
+}
+
+.blue {
+    border: 1px solid blue;
+}
+
+#label {
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+#card {
+    height: 150px;
+    width: 150px;
+    margin: 3px;
+    border: 1px solid black;
+    /*border: 2px solid green;*/
+}
+
+.column1 {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    /*border: 2px solid rgb(68, 71, 68);*/
+}
+
+.row1 {
+    display: flex;
+    justify-content: space-around;
+    /*border: 1px dotted blue;*/
+}
