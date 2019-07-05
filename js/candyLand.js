@@ -32,13 +32,20 @@
 
     //add 6 special cards to deck
 
-    deck.push(newCard("pink", 0, "Plumpy"));
-    deck.push(newCard("pink", 0, "Mr. Mint"));
-    deck.push(newCard("pink", 0, "Jolly"));
-    deck.push(newCard("pink", 0, "Gramma Nut"));
-    deck.push(newCard("pink", 0, "Princess Lolly"));
-    deck.push(newCard("pink", 0, "Queen Frostine"));
-
+    //deck.push(newCard("pink", 0, "Plumpy"));
+    //deck.push(newCard("pink", 0, "Mr. Mint"));
+    //deck.push(newCard("pink", 0, "Jolly"));
+    //deck.push(newCard("pink", 0, "Gramma Nut"));
+    //deck.push(newCard("pink", 0, "Princess Lolly"));
+    //deck.push(newCard("pink", 0, "Queen Frostine"));
+    deck.push(newCard("pink",0,"Cupcake Commons"));
+    deck.push(newCard("pink",0,"Duke of Swirl"));
+    deck.push(newCard("pink",0,"Lord Licorice I"));
+    deck.push(newCard("pink",0,"Lord Licorice II"));
+    deck.push(newCard("pink",0, "Gingerbread House"));
+    deck.push(newCard("pink",0,"Princess Lolly"));
+    deck.push(newCard("pink",0,"Princess Frostine"));
+    deck.push(newCard("pink",0,"Gramma Gooey"));
 
     function nextCard() {
         let card = $('#card');
