@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>simple react 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/css/foundation.css">
+    <!-- <script src="main.js"></script> -->
+    <style>
+    .player {
+        /*border: 1px solid gray;*/
+        border-radius: 6px;
+        margin: 20px;
+        padding: 20px;
+        width: auto;
+        color:rgb(32, 58, 58);
+        box-shadow: 2px 2px 10px;
+    }
+
+    .enemy {
+        background-color:rgb(203, 223, 230);
+    }
+
+    .friend {
+        background-color: rgb(142, 206, 228);
+    }
+
+    .bg-gold {
+        background-color: rgb(196, 144, 15);
+        font-weight:bold;
+    }
+
+    .cardSection {
+        display:inline;
+        margin:auto 10px;
+        padding: 15px;
+        display:flex;
+        justify-content:space-around;
+        flex-wrap:wrap;
+    }
+
+    .spacer {
+        height:3px;
+        width:100%;
+        background-color: rgb(155, 115, 15);
+        margin: 4px;
+    }
+    </style>
+</head>
+
+<body style="font-family:sans-serif; background-color:rgb(219, 186, 103);">
+    <nav>
+        <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="extra-large">
+            <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+            <div class="title-bar-title">Gabe's Games</div>
+        </div>
+
+        <div class="top-bar" id="example-menu">
+             <div class="top-bar-left"> 
+                 <ul class="dropdown menu vertical" data-dropdown-menu>
+                    <li><a href="#">Animal Guessing</a></li>
+                    <li><a href="mathQuiz.html">Math Racer</a></li>
+                    <li><a href="candyLand.html">Candy Land Cards</a></li>
+                    <li><a href="#">Color Squares</a></li>
+                </ul> 
+            </div>
+        </div>
+    </nav> 
+
+    <div id="root"></div>
+
+    <!-- loads react library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.10.1/umd/react.development.js" crossorigin></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.10.1/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- load babel (needed for JSX) -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- my code -->
+    <!-- <script src="my app js files" type="text/babel"></script> -->
+    <script type="text/babel">
+
+        const password = "spaghetti";
+        
+        function Player(name,hp,attack,defense, gold, enemy) {
+            this.id = Math.floor(Math.random() * 9999999999);
+            this.name = name;
+            this.hp = hp;
+            this.maxHp = hp;
+            this.attack = attack;
+            this.defense = defense;
+            this.atkRoll = 0;
+            this.defRoll = 0;
+            this.gold = gold;
+            this.enemy = enemy;
+
+            console.log(`making new Player: ${name}; hp:${hp}; atk:${attack}; defense:${defense}; gold:${gold}; id: ${this.id}`)///
+
+        };
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const App = (props) => {
+
+            const [playersState, setPlayersState] = React.useState({
+                players: props.players
+            });
+
+            const addPlayerHandler = (newPlayer) => {
+                console.log("got back to App component with " + newPlayer.name);///
+                let newPlayerArray = playersState.players;
+                newPlayerArray.push(newPlayer);
+                console.log("newPlayerArray:");///
+                console.log(newPlayerArray);///
+                setPlayersState({ players: newPlayerArray });
+            };
+
+            const attackRollHandler = (playerId) => {
+                let editedPlayers = [...playersState.players];
+                const i = editedPlayers.findIndex( p => p.id === playerId);
+                const thisPlayer = {...playersState.players[i]};
+                console.log(`rolling attack for ${thisPlayer.name}`);///
+                const max = thisPlayer.attack;
+                const min = thisPlayer.attack * .45;
+                const newAtkRoll = (Math.random() * (max-min)) + min;
+                console.log(`rolled ${newAtkRoll}`);///
+                thisPlayer.atkRoll = Math.ceil(newAtkRoll);
+                editedPlayers[i] = thisPlayer;
+                setPlayersState({ players:editedPlayers });
+            };
+
+            const defenseRollHandler = (playerId) => {
+                let editedPlayers = [...playersState.players];
+                const i = editedPlayers.findIndex( p => p.id === playerId);
+                let thisPlayer = editedPlayers[i];
+                console.log(`rolling defense for ${thisPlayer.name}`);///
+                const max = thisPlayer.defense;
+                const min = thisPlayer.defense * .33;
+                const newDefRoll = (Math.random() * (max-min)) + min;
+                console.log(`rolled ${newDefRoll}`);///
+                thisPlayer.defRoll = Math.ceil(newDefRoll);
+                editedPlayers[i] = thisPlayer;
+                setPlayersState({ players:editedPlayers });
+            };
+
+            const hpEffectHandler = (playerId, amount) => {
+                let editedPlayers = [...playersState.players];
+                const i = editedPlayers.findIndex( p => p.id === playerId);
+                let thisPlayer = editedPlayers[i];
+                console.log(`updating ${thisPlayer.name}'s HP by ${amount}`);///
+                let newHp = parseInt(thisPlayer.hp) + parseInt(amount);
+                if (newHp <= 0) { //they're dead. remove them
+                    alert(`${thisPlayer.name} is out of the game`);
+                    editedPlayers.splice(i, 1);
+                } else { //just update HP
+                    thisPlayer.hp = newHp;
+                    editedPlayers[i] = thisPlayer;
+                }                
+                setPlayersState({ players:editedPlayers });
+            };
+
+            const goldAmountChangeHandler = (playerId, amount) => {
+                let editedPlayers = [...playersState.players];
+                const i = editedPlayers.findIndex( p => p.id === playerId);
+                let thisPlayer = editedPlayers[i];
+                console.log(`updating ${thisPlayer.name}'s gold by ${amount}`);///
+                let newGold = parseInt(thisPlayer.gold) + parseInt(amount);
+                thisPlayer.gold = newGold;
+                editedPlayers[i] = thisPlayer;
+                setPlayersState({ players:editedPlayers });
+            }
+
+            const deletePlayerHandler = (playerId) => {
+                let pwAttempt = prompt("enter the password to delete this character:");
+                if (pwAttempt === password) {
+                    let editedPlayers = [...playersState.players];
+                    const i = editedPlayers.findIndex( p => p.id === playerId);
+                    console.log(`deleting ${editedPlayers[i].name} from the game`);///
+                    editedPlayers.splice(i, 1);
+                    setPlayersState({ players: editedPlayers });
+                } else {
+                    console.log("wrong password");
+                }
+            }
+
+            return (
+                <div>
+                    <PlayersContainer 
+                        players={playersState.players}
+                        attackRoll={attackRollHandler}
+                        defenseRoll={defenseRollHandler} 
+                        updateHP={hpEffectHandler}
+                        updateGold={goldAmountChangeHandler}
+                        deletePlayer={deletePlayerHandler}/>
+                    <PlayerAdder addPlayerClick={addPlayerHandler}/>
+                </div>
+            );
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const PlayerAdder = (props) => {
+            const [nameState, setNameState] = React.useState({ name:"name" });
+
+            const nameChange = (event) => {
+                setNameState({ name: event.target.value });
+            };
+
+            const [hpState, setHpState] = React.useState({ hp:0 });
+
+            const hpChange = (event) => {
+                setHpState({ hp: event.target.value });
+            };
+
+            const [defenseState, setDefenseState] = React.useState({ defense:0 });
+
+            const defenseChange = (event) => {
+                setDefenseState({ defense: event.target.value });
+            };
+
+            const [attackState, setAttackState] = React.useState({ attack: 0 });
+
+            const attackChange = (event) => {
+                setAttackState({ attack: event.target.value });
+            };
+
+            const [goldState, setGoldState] = React.useState({ gold:0 });
+
+            const goldChange = (event) => {
+                setGoldState({ gold: event.target.value });
+            };
+
+            const [enemyState, useEnemyState] = React.useState({ enemy:true });
+
+            const chkBxChanged = (event) => {
+                useEnemyState({ enemy: event.target.checked });
+            }
+
+            const addPlayer = () => {
+                console.log("clicked the button. current name: " + nameState.name);///
+                const newPlayer = new Player(nameState.name, hpState.hp, attackState.attack, defenseState.defense, goldState.gold, enemyState.enemy);
+                props.addPlayerClick(newPlayer);
+            }
+
+            return (
+                <div className="cardSection">
+                    <div className="player bg-gold">
+                        <TextInput name="Name: " changed={nameChange} val={nameState.name} size={15}/>
+                        <TextInput name="Hit Points (HP): " changed={hpChange} val={hpState.hp} size={4}/>
+                        <TextInput name="Attack: " changed={attackChange} val={attackState.attack} size={4}/>
+                        <TextInput name="Defense: " changed={defenseChange} val={defenseState.defense} size={4}/>
+                        <TextInput name="Gold: " changed={goldChange} val={goldState.gold} size={4}/>
+                        <div className="spacer"></div>
+                        <button onClick={addPlayer}>Add Player</button>                    
+                        <div style={{float:"right"}}>
+                            <label>Enemy</label>
+                            <input type="checkbox" onChange={chkBxChanged} checked={enemyState.enemy}/>
+                        </div>                        
+                    </div>
+                </div>
+            );
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const TextInput = (props) => {
+            const inputStyle ={
+                padding:"4px",
+                display:"flex",
+                justifyContent: "space-between"
+            };
+
+            return (
+                <div style={inputStyle}>
+                    <label>{props.name}</label>
+                    <input type="text" onChange={props.changed} value={props.val} size={props.size}/>
+                </div>
+            )
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const PlayersContainer = (props) => {            
+            //console.log("rendering PlayersContainer with...")///
+            //console.log(props.players);///
+
+            return (
+                <div className="cardSection">
+                    {props.players.map( 
+                        (plyr) => { return (
+                            <div  key={plyr.id}>
+                                <PlayerView 
+                                    player={plyr}
+                                    attackRoll={() => props.attackRoll(plyr.id)}
+                                    defenseRoll={() => props.defenseRoll(plyr.id)}
+                                    updateHp={props.updateHP}
+                                    updateGold={props.updateGold}
+                                    deletePlayer={() => props.deletePlayer(plyr.id)}/>
+                            </div>
+                        );}
+                    )}
+                </div>
+            );
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const PlayerView = (props) => {
+
+            const [hpState, setHpState] = React.useState({ amount:0 });
+
+            const hpAmountChanged = (event) => {
+                setHpState({ amount:event.target.value });
+            };
+
+            const [goldState, setGoldState] = React.useState({ amount: 0 });
+
+            const goldAmountChanged = (event) => {
+                setGoldState({ amount: event.target.value });
+            };
+
+            // console.log(props.player);///
+            let gold = null;
+            const classes = ["player"];
+            if (props.player.enemy) {
+                classes.push("enemy");
+            } else {
+                classes.push("friend");
+                gold = (
+                    <div>
+                        <h4>Gold: {props.player.gold}</h4>
+                        <input type="text" onChange={goldAmountChanged} value={goldState.amount} size={4}/>&nbsp;
+                        <button onClick={() => props.updateGold(props.player.id, goldState.amount)}>Update Gold</button>
+                    </div>
+                );
+            }
+
+
+            return (
+                <div className={classes.join(' ')}>
+                    <h2 onClick={props.deletePlayer} style={{color:"rgb(5, 46, 59)"}}>{props.player.name}</h2>
+                    <h4>HP: {props.player.hp} / {props.player.maxHp}</h4>
+                    <input type="text" onChange={hpAmountChanged} value={hpState.amount} size={4}/>&nbsp;
+                    <button onClick={() => props.updateHp(props.player.id, hpState.amount)}>Update HP</button>
+                    <PlayerAttribute
+                        name="Attack"
+                        value={props.player.attack}
+                        click={props.attackRoll}
+                        action="Roll Attack"
+                        result={props.player.atkRoll}/>
+                    <PlayerAttribute
+                        name="Defense"
+                        value={props.player.defense}
+                        click={props.defenseRoll}
+                        action="Roll Defense"
+                        result={props.player.defRoll}/>
+                    {gold}
+                </div>
+            )
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const PlayerAttribute = (props) => {
+            const style = { };
+
+            return (
+                <div>
+                    <h4>{props.name}: {props.value}</h4>
+                    <button onClick={props.click}>{props.action}</button>
+                    <p style={{display:"inline"}}>&nbsp;&nbsp;{props.result}</p>
+                </div>
+            )
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        let players = [
+            /*new Player("gary",30,15,10,10), 
+            new Player("jake",30,16,9,10), 
+            new Player("sara",29,15,11,10)*/
+        ];
+
+        ReactDOM.render( <App players={players}/>, document.getElementById("root") );
+
+    </script>
+</body>
+
+</html>
