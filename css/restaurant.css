@@ -1,0 +1,46 @@
+body {
+    background-color: #C4FFB7;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.center-flex-col {
+    display: flex;
+    justify-content: space-around;
+}
+
+#current-restaurant {
+    background-color: #F0FFA9;
+    padding: .5em;
+    color: #5E325B;
+}
+
+#btnSpin {
+    background-color: #64BEB9;
+    color: #F0FFA9;
+    max-width: 20em;
+    flex-grow: 3;
+}
+
+#btnSpin:hover {
+    background-color: #7AE8E2;
+    color: #5E325B;
+}
+
+#btnVeto{
+    color: #ED0B0B;
+    flex-grow: 3;
+}
+
+.vert-spacer {
+    width: 3rem;
+    flex-grow: 1;
+}
+
+#vetoes {
+    display: none;
+}
