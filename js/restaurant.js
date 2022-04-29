@@ -20,7 +20,8 @@
         "Five Guys",
         "Freddy's",
         "Panda Express",
-        "Popeye's"
+        "Popeye's",
+        "Taco Bell"
     ];
 
     function btnSpinClick() {
