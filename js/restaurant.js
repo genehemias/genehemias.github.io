@@ -19,10 +19,14 @@
         "Sonny's",
         "Five Guys",
         "Freddy's",
-        "Panda Express"
+        "Panda Express",
+        "Popeye's",
+        "Taco Bell"
     ];
 
     function btnSpinClick() {
+        document.getElementById('clickSound').play()
+        
         let lblCurrentOption = $('#current-restaurant');
 
         let randomIndex = Math.floor(Math.random() * restaurants.length);
