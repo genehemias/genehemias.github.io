@@ -25,8 +25,7 @@
     ];
 
     function btnSpinClick() {
-        let audioElement = $('#clickSound');
-        audioElement.play();
+        document.getElementById('clickSound').play()
         
         let lblCurrentOption = $('#current-restaurant');
 
