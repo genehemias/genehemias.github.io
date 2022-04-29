@@ -23,6 +23,9 @@
     ];
 
     function btnSpinClick() {
+        let audioElement = $('#clickSound');
+        audioElement.play();
+        
         let lblCurrentOption = $('#current-restaurant');
 
         let randomIndex = Math.floor(Math.random() * restaurants.length);
