@@ -19,7 +19,8 @@
         "Sonny's",
         "Five Guys",
         "Freddy's",
-        "Panda Express"
+        "Panda Express",
+        "Popeye's"
     ];
 
     function btnSpinClick() {
